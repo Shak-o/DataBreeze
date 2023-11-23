@@ -3,22 +3,15 @@ using Grpc.Core;
 
 namespace DataBreeze.Grpc.Services;
 
-public class BreezeCacheService : DataBreezeRpc.DataBreezeRpcBase
+public class BreezeCacheService(IBreezeCacheService cache) : DataBreezeRpc.DataBreezeRpcBase
 {
-    private readonly IBreezeCacheService _cache;
-
-    public BreezeCacheService(IBreezeCacheService cache)
-    {
-        _cache = cache;
-    }
-
     public override Task<GetResponse> Get(GetRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new GetResponse() { CachedData = _cache.Get(request.Id) });
+        return Task.FromResult(new GetResponse() { CachedData = cache.Get(request.Id) });
     }
 
     public override Task<SaveResponse> Save(SaveRequest request, ServerCallContext context)
     {
-        return Task.FromResult(new SaveResponse() { IsSuccess = _cache.Add(request.Id, request.Data) });
+        return Task.FromResult(new SaveResponse() { IsSuccess = cache.Add(request.Id, request.Data) });
     }
 }
