@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="Protos\breezeCache.proto">
+      <Protobuf Include="Protos\breezeCacheServer.proto">
         <GrpcServices>Client</GrpcServices>
         <Access>Public</Access>
         <ProtoCompile>True</ProtoCompile>

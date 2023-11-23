@@ -1,4 +1,4 @@
-using DataBreeze.Grpc.Client;
+using DataBreezeBalancer.Grpc;
 using Grpc.Net.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,17 +41,17 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/GetCache", string (int id) =>
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7177");
-    var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
-    var response = client.Get(new GetRequest() { Id = id });
+    using var channel = GrpcChannel.ForAddress("https://localhost:7011");
+    var client = new DataBreezeRpcForBalancer.DataBreezeRpcForBalancerClient(channel);
+    var response = client.Get(new GetRequestBalancer() { Id = id });
     return response.CachedData;
 });
 
 app.MapPost("/SaveCache", async Task<bool> (int id, string data) =>
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7177");
-    var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
-    var response = await client.SaveAsync(new SaveRequest() { Id = id, Data = data});
+    using var channel = GrpcChannel.ForAddress("https://localhost:7011");
+    var client = new DataBreezeRpcForBalancer.DataBreezeRpcForBalancerClient(channel);
+    var response = await client.SaveAsync(new SaveRequestBalancer() { Id = id, Data = data});
     return response.IsSuccess;
 });
 app.Run();
