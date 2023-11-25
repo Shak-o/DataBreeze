@@ -5,12 +5,15 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
-
+    
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
-        <Protobuf Include="Protos\breezeCache.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Server"/>
     </ItemGroup>
-
+    
+    <ItemGroup>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client"/>
+    </ItemGroup>
+    
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
     </ItemGroup>

@@ -1,14 +1,16 @@
+using DataBreeze.Application.Interfaces;
+using DataBreeze.Application.Services;
 using DataBreeze.LoadBalancer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddSingleton<IServerStoreService, ServerStoreService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
 app.MapGrpcService<BreezeCacheServerService>();
 app.MapGet("/",
     () =>

@@ -1,5 +1,7 @@
 ﻿using DataBreeze.Application.Interfaces;
+using DataBreezeBalancer.Grpc;
 using Grpc.Core;
+using Grpc.Net.Client;
 
 namespace DataBreeze.Grpc.Services;
 

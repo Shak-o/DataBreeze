@@ -19,14 +19,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="Protos\breezeCacheServer.proto">
-        <GrpcServices>Client</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net8.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
+      <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\DataBreeze.Application\DataBreeze.Application.csproj" />
     </ItemGroup>
 
 </Project>

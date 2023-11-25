@@ -5,29 +5,20 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
-
     <ItemGroup>
-        <Protobuf Include="Protos\breezeCacheClient.proto">
-          <GrpcServices>Client</GrpcServices>
-          <Access>Public</Access>
-          <ProtoCompile>True</ProtoCompile>
-          <CompileOutputs>True</CompileOutputs>
-          <OutputDir>obj\Debug\net8.0\</OutputDir>
-          <Generator>MSBuild:Compile</Generator>
-        </Protobuf>
-        <Protobuf Include="Protos\breezeCacheServer.proto">
-          <GrpcServices>Server</GrpcServices>
-          <Access>Public</Access>
-          <ProtoCompile>True</ProtoCompile>
-          <CompileOutputs>True</CompileOutputs>
-          <OutputDir>obj\Debug\net8.0\</OutputDir>
-          <Generator>MSBuild:Compile</Generator>
-        </Protobuf>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Server"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Client"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataBreeze.Application\DataBreeze.Application.csproj" />
     </ItemGroup>
 
 </Project>
