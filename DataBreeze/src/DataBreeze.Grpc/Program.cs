@@ -1,5 +1,6 @@
 using DataBreeze.Application.Interfaces;
 using DataBreeze.Application.Services;
+using DataBreeze.Domain.Options;
 using DataBreeze.Grpc.Middlewares;
 using DataBreeze.Grpc.Services;
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 builder.Services.AddSingleton<IBreezeCacheService, DataBreezeCacheService>();
 builder.Services.AddSingleton<IRegistrationMonitor, RegistrationMonitor>();
+builder.Services.Configure<BalancerOptions>(builder.Configuration.GetSection("Balancer"));
 
 var app = builder.Build();
 

@@ -17,17 +17,24 @@ public class BreezeCacheServerService : DataBreezeRpcForBalancer.DataBreezeRpcFo
 
     public override async Task<GetResponseBalancer> Get(GetRequestBalancer request, ServerCallContext context)
     {
-        using var channel = GrpcChannel.ForAddress("https://localhost:7177");
+        var server = _serverStore.GetServer(request.Id);
+        using var channel = GrpcChannel.ForAddress(server);
+        
         var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
         var response = await client.GetAsync(new GetRequest() { Id = request.Id });
+        
         return new GetResponseBalancer() { CachedData = response.CachedData };
     }
 
     public override async Task<SaveResponseBalancer> Save(SaveRequestBalancer request, ServerCallContext context)
     {
-        using var channel = GrpcChannel.ForAddress("https://localhost:7177");
+        var server = _serverStore.GetNextServer();
+        using var channel = GrpcChannel.ForAddress(server);
+        
         var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
         var response = await client.SaveAsync(new SaveRequest() { Id = request.Id, Data = request.Data });
+        _serverStore.UpdateServer(server, request.Id);
+        
         return new SaveResponseBalancer() { IsSuccess = response.IsSuccess };
     }
 

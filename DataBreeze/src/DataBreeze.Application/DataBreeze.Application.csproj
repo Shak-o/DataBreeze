@@ -16,4 +16,8 @@
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataBreeze.Domain\DataBreeze.Domain.csproj" />
+    </ItemGroup>
 </Project>

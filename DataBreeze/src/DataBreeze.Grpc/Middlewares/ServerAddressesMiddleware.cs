@@ -1,7 +1,10 @@
-﻿using DataBreeze.Application.Interfaces;
+﻿using System.Text;
+using DataBreeze.Application.Interfaces;
+using DataBreeze.Domain.Options;
 using DataBreezeBalancer.Grpc;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.Extensions.Options;
 
 namespace DataBreeze.Grpc.Middlewares;
 
@@ -9,22 +12,30 @@ public class ServerAddressesMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly IRegistrationMonitor _registrationMonitor;
-
-    public ServerAddressesMiddleware(RequestDelegate next, IRegistrationMonitor registrationMonitor)
+    private readonly IOptions<BalancerOptions> _options;
+    
+    public ServerAddressesMiddleware(RequestDelegate next, IRegistrationMonitor registrationMonitor, IOptions<BalancerOptions> options)
     {
         _next = next;
         _registrationMonitor = registrationMonitor;
+        _options = options;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
         if (!_registrationMonitor.IsRegistered())
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:7011");
+            using var channel = GrpcChannel.ForAddress(_options.Value.Address);
             var client = new DataBreezeRpcForBalancer.DataBreezeRpcForBalancerClient(channel);
-            var ip = context.Connection.LocalIpAddress!.ToString();
+            
             var port = context.Connection.LocalPort.ToString();
-            client.Register(new RegisterRequest(){Address = $"{ip}:{port}"});
+            var stringBuilder = new StringBuilder();
+            
+            // TODO: by architecture balancer and cache replicas will run on the same machine or in the same cluster so this must be ok.
+            stringBuilder.Append("https://localhost:");
+            stringBuilder.Append(port);
+            
+            await client.RegisterAsync(new RegisterRequest(){Address = stringBuilder.ToString()});
             _registrationMonitor.SetRegistered();
         }
 
