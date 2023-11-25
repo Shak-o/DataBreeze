@@ -1,12 +1,16 @@
 using DataBreeze.Application.Interfaces;
 using DataBreeze.Application.Services;
+using DataBreeze.Grpc;
 using DataBreeze.LoadBalancer.Services;
+using DataBreeze.Persistence.Implementation;
+using DataBreeze.Persistence.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddSingleton<IServerStoreService, ServerStoreService>();
+builder.Services.AddSingleton<IGrpcChannelFactory, GrpcChannelFactory>();
 
 var app = builder.Build();
 

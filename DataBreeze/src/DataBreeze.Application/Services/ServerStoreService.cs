@@ -29,6 +29,11 @@ public class ServerStoreService : IServerStoreService
         _serverStore[address].Add(id);
     }
 
+    public void RemoveId(string address, int id)
+    {
+        _serverStore[address].Remove(id);
+    }
+
     public string GetServer(int id)
     {
         return _serverStore.First(x => x.Value.Contains(id)).Key;

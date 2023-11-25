@@ -8,6 +8,8 @@ service DataBreezeRpcForBalancer {
   rpc Get(GetRequestBalancer) returns (GetResponseBalancer);
   rpc Save(SaveRequestBalancer) returns (SaveResponseBalancer);
   rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Remove(RemoveRequestBalancer) returns (RemoveResponseBalancer);
+  rpc Update(UpdateRequestBalancer) returns (UpdateResponseBalancer);
 }
 
 message RegisterRequest {
@@ -31,4 +33,21 @@ message GetRequestBalancer {
 
 message GetResponseBalancer {
   string cachedData = 1;
+}
+
+message RemoveRequestBalancer {
+  int32 id = 1;
+}
+
+message RemoveResponseBalancer {
+  bool removed = 1;
+}
+
+message UpdateRequestBalancer {
+  int32 id = 1;
+  string data = 2;
+}
+
+message UpdateResponseBalancer {
+  bool updated = 1;
 }

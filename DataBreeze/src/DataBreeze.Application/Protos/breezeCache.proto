@@ -7,6 +7,8 @@ package breezeCache;
 service DataBreezeRpc {
   rpc Get(GetRequest) returns (GetResponse);
   rpc Save(SaveRequest) returns (SaveResponse);
+  rpc Remove(RemoveRequest) returns (RemoveResponse);
+  rpc Update(UpdateRequest) returns (UpdateResponse);
 }
 
 message SaveRequest {
@@ -24,4 +26,21 @@ message GetRequest {
 
 message GetResponse {
   string cachedData = 1;
+}
+
+message RemoveRequest {
+  int32 id = 1;
+}
+
+message RemoveResponse {
+  bool removed = 1;
+}
+
+message UpdateRequest {
+  int32 id = 1;
+  string data = 2;
+}
+
+message UpdateResponse {
+  bool updated = 1;
 }

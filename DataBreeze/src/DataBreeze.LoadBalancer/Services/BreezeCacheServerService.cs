@@ -1,5 +1,6 @@
 ﻿using DataBreeze.Application.Interfaces;
 using DataBreeze.Grpc;
+using DataBreeze.Persistence.Interfaces;
 using DataBreezeBalancer.Grpc;
 using Grpc.Core;
 using Grpc.Net.Client;
@@ -9,16 +10,17 @@ namespace DataBreeze.LoadBalancer.Services;
 public class BreezeCacheServerService : DataBreezeRpcForBalancer.DataBreezeRpcForBalancerBase
 {
     private readonly IServerStoreService _serverStore;
-
-    public BreezeCacheServerService(IServerStoreService serverStore)
+    private readonly IGrpcChannelFactory _grpcChannelFactory;
+    public BreezeCacheServerService(IServerStoreService serverStore, IGrpcChannelFactory grpcChannelFactory)
     {
         _serverStore = serverStore;
+        _grpcChannelFactory = grpcChannelFactory;
     }
 
     public override async Task<GetResponseBalancer> Get(GetRequestBalancer request, ServerCallContext context)
     {
         var server = _serverStore.GetServer(request.Id);
-        using var channel = GrpcChannel.ForAddress(server);
+        var channel = _grpcChannelFactory.GetChannel(server);
         
         var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
         var response = await client.GetAsync(new GetRequest() { Id = request.Id });
@@ -29,7 +31,7 @@ public class BreezeCacheServerService : DataBreezeRpcForBalancer.DataBreezeRpcFo
     public override async Task<SaveResponseBalancer> Save(SaveRequestBalancer request, ServerCallContext context)
     {
         var server = _serverStore.GetNextServer();
-        using var channel = GrpcChannel.ForAddress(server);
+        var channel = _grpcChannelFactory.GetChannel(server);
         
         var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
         var response = await client.SaveAsync(new SaveRequest() { Id = request.Id, Data = request.Data });
@@ -42,5 +44,27 @@ public class BreezeCacheServerService : DataBreezeRpcForBalancer.DataBreezeRpcFo
     {
         _serverStore.AddServer(request.Address);
         return Task.FromResult(new RegisterResponse() {Result = true});
+    }
+
+    public override async Task<RemoveResponseBalancer> Remove(RemoveRequestBalancer request, ServerCallContext context)
+    {
+        var server = _serverStore.GetServer(request.Id);
+        var channel = _grpcChannelFactory.GetChannel(server);
+        
+        var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
+        var response = await client.RemoveAsync(new RemoveRequest() { Id = request.Id });
+        
+        return new RemoveResponseBalancer() { Removed = response.Removed };
+    }
+
+    public override async Task<UpdateResponseBalancer> Update(UpdateRequestBalancer request, ServerCallContext context)
+    {
+        var server = _serverStore.GetServer(request.Id);
+        var channel = _grpcChannelFactory.GetChannel(server);
+        
+        var client = new DataBreezeRpc.DataBreezeRpcClient(channel);
+        var response = await client.UpdateAsync(new UpdateRequest() { Data = request.Data, Id = request.Id });
+
+        return new UpdateResponseBalancer() { Updated = response.Updated };
     }
 }

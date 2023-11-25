@@ -16,4 +16,14 @@ public class BreezeCacheService(IBreezeCacheService cache) : DataBreezeRpc.DataB
     {
         return Task.FromResult(new SaveResponse() { IsSuccess = cache.Add(request.Id, request.Data) });
     }
+
+    public override Task<UpdateResponse> Update(UpdateRequest request, ServerCallContext context)
+    {
+        return Task.FromResult(new UpdateResponse() { Updated = cache.Update(request.Id, request.Data) });
+    }
+
+    public override Task<RemoveResponse> Remove(RemoveRequest request, ServerCallContext context)
+    {
+        return Task.FromResult(new RemoveResponse() { Removed = cache.Remove(request.Id) });
+    }
 }

@@ -16,4 +16,14 @@ public class DataBreezeCacheService : IBreezeCacheService
     {
         return _cache[id];
     }
+
+    public bool Remove(int id)
+    {
+        return _cache.TryRemove(id, out var removed);
+    }
+
+    public bool Update(int id, string data)
+    {
+        return _cache.TryUpdate(id, data, _cache[id]);
+    }
 }
