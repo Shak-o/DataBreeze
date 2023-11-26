@@ -7,12 +7,16 @@ using DataBreeze.Persistence.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddSingleton<IServerStoreService, ServerStoreService>();
 builder.Services.AddSingleton<IGrpcChannelFactory, GrpcChannelFactory>();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<BreezeCacheServerService>();

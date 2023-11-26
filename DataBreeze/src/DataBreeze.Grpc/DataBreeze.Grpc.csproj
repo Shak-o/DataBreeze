@@ -1,17 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
     
     <ItemGroup>
-        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Server" />
     </ItemGroup>
     
     <ItemGroup>
-        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client" />
     </ItemGroup>
     
     <ItemGroup>
@@ -20,6 +21,13 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DataBreeze.Application\DataBreeze.Application.csproj" />
+      <ProjectReference Include="..\DataBreeze.Aspire\DataBreeze.Aspire.ServiceDefaults\DataBreeze.Aspire.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

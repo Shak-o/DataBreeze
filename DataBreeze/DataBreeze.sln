@@ -1,24 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{8751C3F1-AB09-4EE8-B3E0-7807AED808D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{FDF3C1F3-EFA7-4B04-9CC0-8A5159F9273E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F361CEF5-DFE0-45ED-BC45-EF35930C82C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.Domain", "src\DataBreeze.Domain\DataBreeze.Domain.csproj", "{1EB17E3A-B83E-4BB6-B6C2-D9B309A4F3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.Domain", "src\DataBreeze.Domain\DataBreeze.Domain.csproj", "{1EB17E3A-B83E-4BB6-B6C2-D9B309A4F3F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.Application", "src\DataBreeze.Application\DataBreeze.Application.csproj", "{FB8CE414-E8D7-4030-807B-B5CA40E45F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.Application", "src\DataBreeze.Application\DataBreeze.Application.csproj", "{FB8CE414-E8D7-4030-807B-B5CA40E45F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.Persistence", "src\DataBreeze.Persistence\DataBreeze.Persistence.csproj", "{125C34BF-AC8E-49F4-BA12-D3B10DA96AAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.Persistence", "src\DataBreeze.Persistence\DataBreeze.Persistence.csproj", "{125C34BF-AC8E-49F4-BA12-D3B10DA96AAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{C00A678E-171D-4A38-A1A7-D6110F0878B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp.Api", "example\ClientApp.Api\ClientApp.Api.csproj", "{B6E8E7BC-0E2B-4E66-A4A7-A1FB54996379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp.Api", "example\ClientApp.Api\ClientApp.Api.csproj", "{B6E8E7BC-0E2B-4E66-A4A7-A1FB54996379}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.Grpc", "src\DataBreeze.Grpc\DataBreeze.Grpc.csproj", "{CA6457B3-4A0F-483F-B104-774545F1484A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.Grpc", "src\DataBreeze.Grpc\DataBreeze.Grpc.csproj", "{CA6457B3-4A0F-483F-B104-774545F1484A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.LoadBalancer", "src\DataBreeze.LoadBalancer\DataBreeze.LoadBalancer.csproj", "{38E4A226-ED2A-414F-AF62-7C9057FDD745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.LoadBalancer", "src\DataBreeze.LoadBalancer\DataBreeze.LoadBalancer.csproj", "{38E4A226-ED2A-414F-AF62-7C9057FDD745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBreeze.Aspire.AppHost", "src\DataBreeze.Aspire\DataBreeze.Aspire.AppHost\DataBreeze.Aspire.AppHost.csproj", "{B35E032D-2E1E-40BA-8522-41F15EABC420}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBreeze.Aspire.ServiceDefaults", "src\DataBreeze.Aspire\DataBreeze.Aspire.ServiceDefaults\DataBreeze.Aspire.ServiceDefaults.csproj", "{03D10467-F18F-4FA7-9609-DA6101C4F13C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +57,17 @@ Global
 		{38E4A226-ED2A-414F-AF62-7C9057FDD745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E4A226-ED2A-414F-AF62-7C9057FDD745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E4A226-ED2A-414F-AF62-7C9057FDD745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35E032D-2E1E-40BA-8522-41F15EABC420}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35E032D-2E1E-40BA-8522-41F15EABC420}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35E032D-2E1E-40BA-8522-41F15EABC420}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35E032D-2E1E-40BA-8522-41F15EABC420}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D10467-F18F-4FA7-9609-DA6101C4F13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D10467-F18F-4FA7-9609-DA6101C4F13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D10467-F18F-4FA7-9609-DA6101C4F13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D10467-F18F-4FA7-9609-DA6101C4F13C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1EB17E3A-B83E-4BB6-B6C2-D9B309A4F3F6} = {FDF3C1F3-EFA7-4B04-9CC0-8A5159F9273E}
@@ -58,5 +76,7 @@ Global
 		{B6E8E7BC-0E2B-4E66-A4A7-A1FB54996379} = {C00A678E-171D-4A38-A1A7-D6110F0878B5}
 		{CA6457B3-4A0F-483F-B104-774545F1484A} = {8751C3F1-AB09-4EE8-B3E0-7807AED808D0}
 		{38E4A226-ED2A-414F-AF62-7C9057FDD745} = {8751C3F1-AB09-4EE8-B3E0-7807AED808D0}
+		{B35E032D-2E1E-40BA-8522-41F15EABC420} = {8751C3F1-AB09-4EE8-B3E0-7807AED808D0}
+		{03D10467-F18F-4FA7-9609-DA6101C4F13C} = {8751C3F1-AB09-4EE8-B3E0-7807AED808D0}
 	EndGlobalSection
 EndGlobal

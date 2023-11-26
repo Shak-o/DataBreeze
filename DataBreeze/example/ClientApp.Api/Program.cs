@@ -3,12 +3,16 @@ using Grpc.Net.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -41,7 +45,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapGet("/GetCache", string (int id) =>
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7011");
+    using var channel = GrpcChannel.ForAddress("http://localhost:5194");
     var client = new DataBreezeRpcForBalancer.DataBreezeRpcForBalancerClient(channel);
     var response = client.Get(new GetRequestBalancer() { Id = id });
     return response.CachedData;
@@ -49,7 +53,7 @@ app.MapGet("/GetCache", string (int id) =>
 
 app.MapPost("/SaveCache", async Task<bool> (int id, string data) =>
 {
-    using var channel = GrpcChannel.ForAddress("https://localhost:7011");
+    using var channel = GrpcChannel.ForAddress("http://localhost:5194");
     var client = new DataBreezeRpcForBalancer.DataBreezeRpcForBalancerClient(channel);
     var response = await client.SaveAsync(new SaveRequestBalancer() { Id = id, Data = data});
     return response.IsSuccess;

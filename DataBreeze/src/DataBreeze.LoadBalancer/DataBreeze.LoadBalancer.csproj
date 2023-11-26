@@ -6,11 +6,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
-        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Server"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Server" />
     </ItemGroup>
     
     <ItemGroup>
-        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Client"/>
+        <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCache.proto" GrpcServices="Client" />
     </ItemGroup>
 
     <ItemGroup>
@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DataBreeze.Application\DataBreeze.Application.csproj" />
+      <ProjectReference Include="..\DataBreeze.Aspire\DataBreeze.Aspire.ServiceDefaults\DataBreeze.Aspire.ServiceDefaults.csproj" />
     </ItemGroup>
 
 </Project>

@@ -14,16 +14,17 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client"/>
+      <Protobuf Include="..\..\src\DataBreeze.Application\Protos\breezeCacheServer.proto" GrpcServices="Client" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\DataBreeze.Application\DataBreeze.Application.csproj" />
+      <ProjectReference Include="..\..\src\DataBreeze.Aspire\DataBreeze.Aspire.ServiceDefaults\DataBreeze.Aspire.ServiceDefaults.csproj" />
     </ItemGroup>
 
 </Project>

@@ -32,7 +32,7 @@ public class ServerAddressesMiddleware
             var stringBuilder = new StringBuilder();
             
             // TODO: by architecture balancer and cache replicas will run on the same machine or in the same cluster so this must be ok.
-            stringBuilder.Append("https://localhost:");
+            stringBuilder.Append("http://localhost:");
             stringBuilder.Append(port);
             
             await client.RegisterAsync(new RegisterRequest(){Address = stringBuilder.ToString()});
